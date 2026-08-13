@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(npm -v)",
+      "Bash(npm ls *)",
+      "Bash(npm install *)",
+      "Bash(rm -f App.css assets/react.svg assets/vite.svg assets/hero.png)",
+      "Bash(rmdir assets *)",
+      "Bash(cd \"D:/PROJET/SPENTANA/Site/site/spentana-web/src\" && mkdir -p data hooks constants components/layout components/navigation components/ui components/cards components/sections pages && echo done)",
+      "Bash(mkdir -p public/assets)",
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/assets/spentana-logo.png)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://localhost:5173/Spentana/spfootnight.jpg\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/src/main.jsx)",
+      "Bash(node \"C:/Users/YANNIC~1/AppData/Local/Temp/claude/d--PROJET-SPENTANA-Site-site-spentana-web/c6b86b5e-670a-4677-b35a-c74cc38444ac/scratchpad/ssr-smoke.mjs\")",
+      "Bash(cp \"C:/Users/YANNIC~1/AppData/Local/Temp/claude/d--PROJET-SPENTANA-Site-site-spentana-web/c6b86b5e-670a-4677-b35a-c74cc38444ac/scratchpad/ssr-smoke.mjs\" ./_ssr-smoke.mjs)",
+      "Bash(node ./_ssr-smoke.mjs)",
+      "Bash(sed \"s#react-router-dom/server#react-router#\" \"C:/Users/YANNIC~1/AppData/Local/Temp/claude/d--PROJET-SPENTANA-Site-site-spentana-web/c6b86b5e-670a-4677-b35a-c74cc38444ac/scratchpad/ssr-smoke.mjs\")",
+      "Bash(pkill -f \"vite\")",
+      "Bash(node -e \"const b=require\\('fs'\\).readFileSync\\('public/Logo/LogoSpentana.png'\\); console.log\\('dims', b.readUInt32BE\\(16\\)+'x'+b.readUInt32BE\\(20\\)\\);\")",
+      "Bash(curl -s -I \"https://maps.app.goo.gl/tELxmPc34J4p5iq3A\")",
+      "Bash(curl -sL -o /dev/null -w \"%{url_effective}\\\\n\" \"https://maps.app.goo.gl/tELxmPc34J4p5iq3A\")",
+      "Bash(sed -i 's/var\\(--color-orange\\)/var\\(--color-green\\)/g' pages/EventsPage.jsx pages/HomePage.jsx)",
+      "Bash(sed -i \"s/#e5842a/#2f9e44/g\" data/infra.js data/home.js data/disciplines.js components/cards/EventCard.jsx)",
+      "Bash(sed -i 's/rgba\\(229, 132, 42, 0.16\\)/rgba\\(47, 158, 68, 0.16\\)/g; s/rgba\\(229, 132, 42, 0.4\\)/rgba\\(47, 158, 68, 0.4\\)/g; s/#f0a75e/#79c98d/g' pages/AcademyPage.module.css)",
+      "Bash(rm -f public/assets/spentana-logo.png)",
+      "Bash(rmdir public/assets)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" \"https://www.google.com/maps?q=SPENTANA+ACADEMY+MADAGASCAR&ll=-18.9479211,47.5564275&z=16&hl=fr&output=embed\")",
+      "Bash(awk '{print $NF, $5\" octets\"}')"
+    ],
+    "additionalDirectories": [
+      "D:\\PROJET\\SPENTANA\\Site\\site\\spentana-web\\src"
+    ]
+  }
+}

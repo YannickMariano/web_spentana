@@ -1,0 +1,87 @@
+.history {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.historyText {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.eyebrow {
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.historyText h2 {
+  font: 600 clamp(26px, 3vw, 40px) / 1.1 var(--font-display);
+  letter-spacing: -0.025em;
+}
+.historyText p {
+  margin: 0;
+  font: 400 16px/1.7 var(--font-body);
+  color: var(--color-text);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+.timelineRow {
+  display: flex;
+  gap: 18px;
+  padding: 14px 0;
+  border-top: 1px solid var(--color-line);
+}
+.timelineRow span:first-child {
+  min-width: 56px;
+  font: 600 14px/1.5 var(--font-display);
+  color: var(--color-primary);
+}
+.timelineRow span:last-child {
+  font: 400 15px/1.5 var(--font-body);
+  color: var(--color-text-strong);
+}
+
+.historyPhotos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.historyPhotos img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
+.archivePhoto {
+  aspect-ratio: 4 / 3;
+}
+.todayPhoto {
+  aspect-ratio: 21 / 9;
+}
+
+.infraGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.faqWrap {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(22px, 3vw, 34px);
+}
+.faqHead {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faqHead h2 {
+  font: 600 clamp(26px, 3vw, 40px) / 1.1 var(--font-display);
+  letter-spacing: -0.025em;
+}

@@ -1,0 +1,20 @@
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.title {
+  margin: 0;
+  max-width: 22ch;
+  font: 600 clamp(32px, 4.4vw, 58px) / 1.05 var(--font-display);
+  letter-spacing: -0.03em;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+.gridSection {
+  padding: 0 clamp(20px, 5vw, 80px) clamp(56px, 7vw, 100px);
+}

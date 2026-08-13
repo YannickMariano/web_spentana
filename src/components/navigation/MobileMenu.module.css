@@ -1,0 +1,78 @@
+.toggle {
+  display: none;
+  margin-left: auto;
+  order: 3;
+  cursor: pointer;
+  border: 1px solid var(--color-line);
+  background: #fff;
+  border-radius: 9px;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.toggle span,
+.toggle span::before,
+.toggle span::after {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--color-ink);
+  position: relative;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.toggle span::before {
+  position: absolute;
+  top: -6px;
+}
+.toggle span::after {
+  position: absolute;
+  top: 6px;
+}
+.toggleOpen span {
+  background: transparent;
+}
+.toggleOpen span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.toggleOpen span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 96px 24px 24px;
+  gap: 4px;
+  animation: sp-fade 0.25s both;
+  overflow-y: auto;
+}
+
+.link {
+  padding: 16px 4px;
+  border-bottom: 1px solid var(--color-line);
+  font: 600 17px/1 var(--font-display);
+  color: var(--color-ink);
+}
+.linkActive {
+  color: var(--color-primary);
+}
+
+.cta {
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .toggle {
+    display: inline-flex;
+  }
+}

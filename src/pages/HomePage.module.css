@@ -1,0 +1,214 @@
+.intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+
+.introText {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.introEyebrow {
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.introTitle {
+  font: 600 clamp(28px, 3.4vw, 46px) / 1.08 var(--font-display);
+  letter-spacing: -0.025em;
+}
+
+.introDesc {
+  margin: 0;
+  font: 400 17px/1.7 var(--font-body);
+  color: var(--color-text);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.collageWide {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
+}
+.collage img {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+.collageWide img {
+  aspect-ratio: 16 / 9;
+}
+
+.universGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.infraGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.why {
+  background: var(--color-night);
+  color: #fff;
+}
+.whyInner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(30px, 5vw, 72px);
+}
+.whyText {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.whyText .eyebrow {
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a9d9f7;
+}
+.whyText h2 {
+  font: 600 clamp(28px, 3.2vw, 44px) / 1.08 var(--font-display);
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+.whyText p {
+  margin: 0;
+  font: 400 16px/1.7 var(--font-body);
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.whyCard {
+  background: var(--color-night);
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transition: background 0.3s;
+}
+.whyCard:hover {
+  background: #14201b;
+}
+.whyBadge {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font: 700 12px/1 var(--font-display);
+  color: #fff;
+}
+.whyCard h4 {
+  margin: 4px 0 0;
+  font: 600 16px/1.3 var(--font-display);
+  color: #fff;
+}
+.whyCard p {
+  margin: 0;
+  font: 400 14px/1.6 var(--font-body);
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.galleryTeaser {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.galleryTeaser a {
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-out);
+}
+.galleryTeaser a:hover {
+  transform: scale(1.03);
+}
+.galleryTeaser img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testimonialsHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 44ch;
+  margin-bottom: clamp(26px, 4vw, 44px);
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.location {
+  padding: 0;
+}
+.locationGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.locationText {
+  padding: clamp(44px, 6vw, 88px) clamp(20px, 5vw, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: center;
+  background: #fff;
+}
+.locationText p {
+  margin: 0;
+  font: 400 16px/1.7 var(--font-body);
+  color: var(--color-text);
+}
+.locationDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font: 500 15px/1.5 var(--font-body);
+  color: var(--color-text-strong);
+}
+.map {
+  min-height: 340px;
+  position: relative;
+  background: #ecf1f6;
+  display: flex;
+}

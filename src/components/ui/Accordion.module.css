@@ -1,0 +1,38 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-line);
+}
+
+.item {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.trigger {
+  width: 100%;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 22px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+  font: 600 17px/1.4 var(--font-display);
+  color: var(--color-ink);
+}
+
+.sign {
+  flex: none;
+  font: 400 22px/1 var(--font-display);
+}
+
+.answer {
+  margin: 0;
+  padding: 0 0 24px;
+  max-width: 70ch;
+  font: 400 15.5px/1.7 var(--font-body);
+  color: var(--color-text);
+  animation: sp-fade 0.4s both;
+}

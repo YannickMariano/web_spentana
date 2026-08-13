@@ -1,0 +1,87 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 10px;
+  padding: 15px 24px;
+  cursor: pointer;
+  font: 700 13.5px/1 var(--font-body);
+  letter-spacing: 0.01em;
+  text-align: center;
+  white-space: nowrap;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s, color 0.25s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(44, 133, 200, 0.3);
+}
+.primary:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.accent {
+  background: var(--color-green);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(47, 158, 68, 0.32);
+}
+.accent:hover {
+  background: var(--color-green-dark);
+  color: #fff;
+}
+
+.marine {
+  background: var(--color-marine);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(20, 82, 140, 0.32);
+}
+.marine:hover {
+  background: var(--color-marine-dark);
+  color: #fff;
+}
+
+.secondary {
+  background: #fff;
+  color: var(--color-ink);
+  border: 1px solid #d3dbe4;
+  box-shadow: none;
+}
+.secondary:hover {
+  background: var(--color-surface-tint);
+  color: var(--color-ink);
+}
+
+.ghost {
+  background: none;
+  color: var(--color-primary);
+  padding: 0;
+  border-radius: 0;
+}
+.ghost:hover {
+  transform: none;
+  color: var(--color-primary-dark);
+}
+
+.onDark {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  box-shadow: none;
+}
+.onDark:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.sm {
+  padding: 11px 18px;
+  font-size: 12.5px;
+}

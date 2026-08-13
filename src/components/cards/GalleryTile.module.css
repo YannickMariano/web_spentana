@@ -1,0 +1,35 @@
+.tile {
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s var(--ease-out);
+}
+.tile:hover {
+  transform: scale(1.02);
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.catBadge {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.86);
+  font: 600 10px/1 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #3a4450;
+}

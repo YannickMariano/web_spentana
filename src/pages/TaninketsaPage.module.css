@@ -1,0 +1,222 @@
+.mission {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.eyebrow {
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.missionQuote {
+  margin: 0;
+  font: 600 clamp(26px, 3.2vw, 42px) / 1.15 var(--font-display);
+  letter-spacing: -0.025em;
+}
+.missionText {
+  margin: 0;
+  font: 400 17px/1.75 var(--font-body);
+  color: var(--color-text);
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.pillarCard {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+  transition: transform 0.35s, box-shadow 0.35s;
+}
+.pillarCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+.pillarBadge {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #e8f2fb;
+  display: grid;
+  place-items: center;
+  font: 700 13px/1 var(--font-display);
+  color: var(--color-primary);
+}
+.pillarCard h3 {
+  margin: 4px 0 0;
+  font: 600 19px/1.25 var(--font-display);
+}
+.pillarCard p {
+  margin: 0;
+  font: 400 14.5px/1.65 var(--font-body);
+  color: var(--color-text);
+}
+
+.journeeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+}
+.journeeCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e2e8ef;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.journeeCard span:first-child {
+  font: 700 13px/1 var(--font-display);
+  color: var(--color-primary);
+}
+.journeeCard strong {
+  font: 600 15.5px/1.3 var(--font-display);
+}
+.journeeCard span:last-child {
+  font: 400 13.5px/1.6 var(--font-body);
+  color: var(--color-text-soft);
+}
+
+.blocksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.block {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  display: flex;
+  flex-direction: column;
+}
+.blockMedia {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.blockMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.blockBody {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  background: #fff;
+  flex: 1;
+}
+.blockTag {
+  font: 700 10px/1 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.blockBody h3 {
+  margin: 0;
+  font: 600 21px/1.2 var(--font-display);
+  letter-spacing: -0.015em;
+}
+.blockBody p {
+  margin: 0;
+  font: 400 14.5px/1.65 var(--font-body);
+  color: var(--color-text);
+}
+
+.squadHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+.squadHeadText {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 44ch;
+}
+.squadHeadText h2 {
+  font: 600 clamp(28px, 3.2vw, 44px) / 1.08 var(--font-display);
+  letter-spacing: -0.025em;
+}
+.squadHeadText p {
+  margin: 0;
+  font: 400 16px/1.7 var(--font-body);
+  color: var(--color-text);
+}
+
+.squadStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+.squadStatCard {
+  background: #fff;
+  border: 1px solid #e2e8ef;
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.squadStatCard strong {
+  font: 600 26px/1 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--color-marine);
+}
+.squadStatCard span {
+  font: 400 13px/1.5 var(--font-body);
+  color: var(--color-text-soft);
+}
+
+.playersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  gap: 18px;
+}
+
+.admission {
+  background: var(--color-night);
+  color: #fff;
+}
+.admissionInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+}
+.admissionText {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 46ch;
+}
+.admissionText h2 {
+  font: 600 clamp(26px, 3vw, 40px) / 1.12 var(--font-display);
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+.admissionText p {
+  margin: 0;
+  font: 400 15.5px/1.7 var(--font-body);
+  color: rgba(255, 255, 255, 0.66);
+}
+.admissionActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}

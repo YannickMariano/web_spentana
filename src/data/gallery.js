@@ -1,0 +1,41 @@
+// Photothèque de la page Galerie. `span` contrôle la hauteur relative de la
+// tuile dans la grille masonry (voir components/sections/GalleryMasonry.jsx).
+export const galleryCategories = [
+  'Tout',
+  'Complexe',
+  'Football',
+  'Basket',
+  'Natation',
+  'Musique',
+  'Taninketsa',
+  'Archives',
+];
+
+export const gallery = [
+  { id: 1, cat: 'Complexe', image: '/Spentana/spspentana1.JPG', alt: 'Vue aérienne des terrains de basketball et de la piscine', span: 22 },
+  { id: 2, cat: 'Football', image: '/Spentana/spfootnight.jpg', alt: 'Match de football en soirée sous les projecteurs', span: 18 },
+  { id: 3, cat: 'Natation', image: '/Spentana/sppiscine2.jpg', alt: 'Bord de la piscine Spentana, fresque murale', span: 16 },
+  { id: 4, cat: 'Basket', image: '/Spentana/spbasket2.jpg', alt: 'Panier de basketball du complexe, vue en contre-plongée', span: 18 },
+  { id: 5, cat: 'Musique', image: '/Academy/musique2.jpg', alt: "Cours de musique à l'Academy" },
+  { id: 6, cat: 'Taninketsa', image: '/Taninketsa/taninketsaetude2.jpg', alt: "Salle d'étude du soir à l'internat Taninketsa", span: 16 },
+  { id: 7, cat: 'Complexe', image: '/Spentana/spreunion1.jpg', alt: 'Réunion en salle au complexe Spentana', span: 18 },
+  { id: 8, cat: 'Complexe', image: '/Spentana/spfoota9.jpg', alt: 'Le grand terrain de football en fin de journée', span: 18 },
+  { id: 9, cat: 'Football', image: '/Academy/entrainement1.JPG', alt: "Jeunes en échauffement à l'Academy" },
+  { id: 10, cat: 'Football', image: '/Academy/match1.JPG', alt: 'Match de jeunes joueurs en action' },
+  { id: 11, cat: 'Taninketsa', image: '/Taninketsa/taninketsacantine.jpg', alt: 'Cantine du centre de formation Taninketsa', span: 16 },
+  { id: 12, cat: 'Complexe', image: '/Spentana/billard2.jpeg', alt: 'Salle de billard du complexe Spentana' },
+  { id: 13, cat: 'Basket', image: '/Academy/abasket2.jpg', alt: "Séance de basket à l'Academy", span: 18 },
+  { id: 14, cat: 'Natation', image: '/Spentana/sppiscine4.jpg', alt: 'La piscine du complexe Spentana', span: 20 },
+  { id: 15, cat: 'Musique', image: '/Academy/musique3.jpg', alt: 'Élève de musique à la Spentana Academy', span: 18 },
+  { id: 16, cat: 'Taninketsa', image: '/Taninketsa/taninketsa1.jpg', alt: 'Groupe d’élèves de Taninketsa Academy' },
+  { id: 17, cat: 'Complexe', image: '/Spentana/spsalle3.jpg', alt: 'Salle de réception du complexe Spentana', span: 16 },
+  { id: 18, cat: 'Football', image: '/Academy/afoot4.jpg', alt: "École de football à l'Academy", span: 18 },
+  { id: 19, cat: 'Basket', image: '/Spentana/spvolley.jpg', alt: 'Terrain de volleyball du complexe Spentana' },
+  { id: 20, cat: 'Taninketsa', image: '/Taninketsa/taninketsainternat.jpg', alt: "Chambre de l'internat Taninketsa", span: 16 },
+  { id: 21, cat: 'Complexe', image: '/Spentana/spsalle2.jpg', alt: 'Salle de réception dressée', span: 18 },
+  { id: 22, cat: 'Football', image: '/Academy/U11.jpg', alt: 'Catégorie U11 de la Spentana Academy' },
+  { id: 23, cat: 'Archives', image: '/Ancien/ancien2.jpg', alt: 'Photo d’archive du site avant construction', span: 16 },
+  { id: 24, cat: 'Archives', image: '/Ancien/ancien3.jpg', alt: 'Photo d’archive du chantier du complexe', span: 16 },
+  { id: 25, cat: 'Taninketsa', image: '/Taninketsa/taninketsa2.jpg', alt: 'Vie quotidienne au centre Taninketsa', span: 18 },
+  { id: 26, cat: 'Complexe', image: '/Spentana/spfoot5.jpeg', alt: 'Terrain de football du complexe Spentana' },
+];
