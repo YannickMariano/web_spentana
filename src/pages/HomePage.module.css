@@ -144,26 +144,6 @@
   gap: 18px;
 }
 
-.galleryTeaser {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-}
-.galleryTeaser a {
-  display: block;
-  aspect-ratio: 1 / 1;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.35s var(--ease-out);
-}
-.galleryTeaser a:hover {
-  transform: scale(1.03);
-}
-.galleryTeaser img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 .testimonialsHeader {
   display: flex;

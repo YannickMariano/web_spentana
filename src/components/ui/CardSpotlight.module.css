@@ -1,0 +1,55 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Le contenu (texte, badge…) passe au-dessus de la nappe lumineuse. */
+.wrapper > :not(.overlay) {
+  position: relative;
+  z-index: 1;
+}
+
+.overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  /* Au-dessus du contenu : la lumière balaie toute la surface (cartes + texte)
+     sans jamais masquer le contenu grâce au fondu `screen` des points. */
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: inherit;
+}
+
+.wrapper:hover .overlay {
+  opacity: 1;
+}
+
+/* Grille de points bleu / violet révélée par le masque radial (imite l'effet
+   canvas d'origine, sans three.js). `screen` = n'éclaircit que, ne cache pas. */
+.dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(59, 130, 246, 0.6) 1px, transparent 1.6px),
+    radial-gradient(rgba(139, 92, 246, 0.5) 1px, transparent 1.6px);
+  background-size: 14px 14px, 14px 14px;
+  background-position: 0 0, 7px 7px;
+  mix-blend-mode: screen;
+  animation: spotlight-twinkle 3s ease-in-out infinite;
+}
+
+@keyframes spotlight-twinkle {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dots {
+    animation: none;
+  }
+}

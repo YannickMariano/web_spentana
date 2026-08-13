@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { NAV_LINKS, SITE } from '../../constants/site';
-import Button from '../ui/Button';
+import InteractiveHoverButton from '../ui/InteractiveHoverButton';
 import MobileMenu from '../navigation/MobileMenu';
 import styles from './Header.module.css';
 
@@ -40,9 +40,11 @@ export default function Header() {
           ))}
         </nav>
 
-        <Button href={SITE.phoneHref} variant="primary" className={styles.cta}>
-          Appeler pour réserver
-        </Button>
+        <InteractiveHoverButton
+          href={SITE.phoneHref}
+          text="Appeler pour réserver"
+          className={styles.cta}
+        />
 
         <MobileMenu
           open={menuOpen}

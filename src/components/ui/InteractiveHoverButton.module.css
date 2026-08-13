@@ -1,0 +1,81 @@
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  padding: 15px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+  font: 700 13.5px/1 var(--font-body);
+  color: #fff;
+  background: var(--color-primary);
+  box-shadow: 0 8px 22px rgba(44, 133, 200, 0.3);
+}
+
+/* Texte visible au repos : glisse vers la droite et s'efface au survol. */
+.front {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  transform: translateX(2px);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.btn:hover .front {
+  transform: translateX(48px);
+  opacity: 0;
+}
+
+/* Texte + flèche : entre depuis la droite au survol. */
+.hover {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: translateX(48px);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  color: #fff;
+}
+.btn:hover .hover {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Pastille qui s'étend pour remplir le bouton (léger assombrissement bleu). */
+.circle {
+  position: absolute;
+  left: 20%;
+  top: 40%;
+  z-index: 5;
+  height: 8px;
+  width: 8px;
+  border-radius: 8px;
+  background: var(--color-primary-dark);
+  opacity: 0;
+  transform: scale(1);
+  transition: all 0.3s;
+}
+.btn:hover .circle {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  transform: scale(1.8);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .front,
+  .hover,
+  .circle {
+    transition: none;
+  }
+}

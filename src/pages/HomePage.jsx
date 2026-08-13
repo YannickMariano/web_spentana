@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import Hero from '../components/sections/hero/Hero';
 import SectionHeader from '../components/ui/SectionHeader';
 import Reveal from '../components/ui/Reveal';
@@ -9,6 +8,8 @@ import InfraCard from '../components/cards/InfraCard';
 import EventCard from '../components/cards/EventCard';
 import TestimonialCard from '../components/cards/TestimonialCard';
 import StatsSection from '../components/sections/StatsSection';
+import CardSpotlight from '../components/ui/CardSpotlight';
+import CoverflowCarousel from '../components/ui/CoverflowCarousel';
 import Map from '../components/ui/Map';
 import { introTags, univers, whyPoints } from '../data/home';
 import { infra } from '../data/infra';
@@ -19,7 +20,7 @@ import { SITE } from '../constants/site';
 import styles from './HomePage.module.css';
 
 const upcomingEvents = events.filter((e) => e.group === 'À venir').slice(0, 3);
-const galleryTeaser = gallery.slice(0, 6);
+const gallerySlides = gallery.slice(0, 12).map((g) => ({ src: g.image, alt: g.alt }));
 
 export default function HomePage() {
   return (
@@ -90,7 +91,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={`section ${styles.why}`}>
+      <CardSpotlight as="section" radius={520} className={`section ${styles.why}`}>
         <div className={`container ${styles.whyInner}`}>
           <Reveal className={styles.whyText}>
             <span className={styles.eyebrow}>Pourquoi Spentana</span>
@@ -112,7 +113,7 @@ export default function HomePage() {
             ))}
           </Reveal>
         </div>
-      </section>
+      </CardSpotlight>
 
       <StatsSection />
 
@@ -148,12 +149,8 @@ export default function HomePage() {
               </Button>
             }
           />
-          <Reveal className={styles.galleryTeaser}>
-            {galleryTeaser.map((g) => (
-              <Link key={g.id} to="/galerie">
-                <img src={g.image} alt={g.alt} loading="lazy" decoding="async" />
-              </Link>
-            ))}
+          <Reveal>
+            <CoverflowCarousel slides={gallerySlides} showNavigation showPagination />
           </Reveal>
         </div>
       </section>
