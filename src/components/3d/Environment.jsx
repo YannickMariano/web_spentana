@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
-import { Sky, Stars } from '@react-three/drei';
-import { Path, Shape } from 'three';
+import { useFrame } from '@react-three/fiber';
+import { Sky } from '@react-three/drei';
+import { Color, Path, Shape, Vector3 } from 'three';
 import Boxes from './Boxes';
 import Trees from './Trees';
 import Vehicles from './Vehicles';
 import { poolBasinsWorld } from './layout';
-import { FOG_COLOR, NIGHT_COLOR, SUN_DIRECTION } from './sky';
+import { applyGlows, dayNight, stepDayNight } from './dayNight';
+import { FOG_COLOR, SUN_DIRECTION } from './sky';
 import {
   asphaltTexture,
   earthTexture,
@@ -230,40 +231,124 @@ function Surroundings({ quality }) {
   );
 }
 
-// Soleil : lumière directionnelle + ombres. Les ombres du décor étant fixes,
-// on ne recalcule la carte d'ombres que pendant les premières images.
+// Les deux états entre lesquels la scène évolue en douceur.
+const DAY = {
+  sun: new Color('#fff0d8'),
+  sunIntensity: 3.5,
+  sky: new Color('#dbe8ff'),
+  ground: new Color('#8d8068'),
+  ambient: 0.38,
+  environment: 0.55,
+  haze: new Color(FOG_COLOR),
+  exposure: 0.92,
+  rayleigh: 1.1,
+  turbidity: 5.5,
+  mie: 0.006,
+};
+const DUSK = {
+  sun: new Color('#ff8438'),
+  sunIntensity: 1.15,
+  sky: new Color('#7a6fa8'),
+  ground: new Color('#33262a'),
+  ambient: 0.26,
+  environment: 0.1,
+  haze: new Color('#bd7650'),
+  exposure: 0.8,
+  rayleigh: 3.2,
+  turbidity: 11,
+  mie: 0.02,
+};
+// Soleil couchant : bas sur l'horizon, au nord, face à la vue d'arrivée. La lumière reste un peu
+// plus haute que le disque visible pour garder des ombres lisibles.
+const DUSK_LIGHT_DIRECTION = new Vector3(0.2, 0.17, -1).normalize();
+const DUSK_SKY_DIRECTION = new Vector3(0.2, 0.035, -1).normalize();
+
+const mix = (a, b, t) => a + (b - a) * t;
+const _dir = new Vector3();
+
+// Soleil, ciel et brume. Le jour, le soleil est haut et éclaire la scène ;
+// quand on passe en mode nuit il descend jusqu'à l'horizon, le ciel vire à
+// l'orangé, la lumière baisse et les éclairages du complexe prennent le relais.
+// Tout est interpolé image par image : aucun changement brutal.
 function Sun({ quality, night }) {
+  const sun = useRef();
+  const skyRef = useRef();
+  const ambient = useRef();
   const frames = useRef(0);
-  const get = useThree((s) => s.get);
 
-  // La nuit, le ciel n'éclaire presque plus : on baisse la lumière ambiante
-  // issue de la carte d'environnement.
+  const mounted = useRef(false);
+
   useEffect(() => {
-    get().scene.environmentIntensity = night ? 0.05 : 0.55;
-  }, [get, night]);
+    dayNight.target = night ? 1 : 0;
+    // À l'ouverture de la visite, on part directement de l'état demandé ;
+    // ensuite, chaque bascule est animée.
+    if (!mounted.current) {
+      mounted.current = true;
+      dayNight.progress = dayNight.target;
+      dayNight.value = dayNight.target;
+    }
+  }, [night]);
 
-  useFrame(({ gl }) => {
-    if (!quality.shadows || frames.current > 12) return;
-    frames.current += 1;
-    gl.shadowMap.autoUpdate = frames.current < 12;
-    gl.shadowMap.needsUpdate = true;
+  useFrame(({ gl, scene }, delta) => {
+    const moving = stepDayNight(Math.min(delta, 0.05));
+    const first = frames.current < 12;
+    if (first) frames.current += 1;
+    // Les ombres du décor sont fixes : on ne recalcule la carte d'ombres que
+    // pendant les premières images, puis tant que le soleil se déplace.
+    if (quality.shadows) {
+      gl.shadowMap.autoUpdate = false;
+      if (first || moving) gl.shadowMap.needsUpdate = true;
+    }
+    if (!first && !moving) return;
+
+    const t = dayNight.value;
+    _dir.copy(SUN_DIRECTION).lerp(DUSK_LIGHT_DIRECTION, t).normalize();
+    sun.current.position.copy(_dir).multiplyScalar(320);
+    sun.current.color.copy(DAY.sun).lerp(DUSK.sun, t);
+    sun.current.intensity = mix(DAY.sunIntensity, DUSK.sunIntensity, t);
+
+    ambient.current.color.copy(DAY.sky).lerp(DUSK.sky, t);
+    ambient.current.groundColor.copy(DAY.ground).lerp(DUSK.ground, t);
+    ambient.current.intensity = mix(DAY.ambient, DUSK.ambient, t);
+
+    scene.environmentIntensity = mix(DAY.environment, DUSK.environment, t);
+    scene.fog.color.copy(DAY.haze).lerp(DUSK.haze, t);
+    scene.background.copy(scene.fog.color);
+    gl.toneMappingExposure = mix(DAY.exposure, DUSK.exposure, t);
+
+    const sky = skyRef.current?.material.uniforms;
+    if (sky) {
+      sky.sunPosition.value.copy(SUN_DIRECTION).lerp(DUSK_SKY_DIRECTION, t).normalize();
+      sky.rayleigh.value = mix(DAY.rayleigh, DUSK.rayleigh, t);
+      sky.turbidity.value = mix(DAY.turbidity, DUSK.turbidity, t);
+      sky.mieCoefficient.value = mix(DAY.mie, DUSK.mie, t);
+    }
+    applyGlows();
   });
 
-  const position = SUN_DIRECTION.clone().multiplyScalar(320).toArray();
   return (
     <>
-      <hemisphereLight args={night ? ['#8fa6d8', '#1b2230', 0.3] : ['#dbe8ff', '#8d8068', 0.38]} />
-      {/* Le même astre sert de soleil le jour et de lune (froide, faible) la nuit. */}
+      <Sky
+        ref={skyRef}
+        distance={450000}
+        sunPosition={SUN_DIRECTION.toArray()}
+        turbidity={DAY.turbidity}
+        rayleigh={DAY.rayleigh}
+        mieCoefficient={DAY.mie}
+        mieDirectionalG={0.82}
+      />
+      <hemisphereLight ref={ambient} args={['#dbe8ff', '#8d8068', DAY.ambient]} />
       <directionalLight
-        position={position}
-        intensity={night ? 0.32 : 3.5}
-        color={night ? '#a9bfff' : '#fff0d8'}
+        ref={sun}
+        position={SUN_DIRECTION.clone().multiplyScalar(320).toArray()}
+        intensity={DAY.sunIntensity}
+        color="#fff0d8"
         castShadow={quality.shadows}
         shadow-mapSize={[quality.shadowMap, quality.shadowMap]}
         shadow-bias={-0.0004}
         shadow-normalBias={0.35}
       >
-        <orthographicCamera attach="shadow-camera" args={[-190, 190, 170, -170, 60, 700]} />
+        <orthographicCamera attach="shadow-camera" args={[-210, 210, 190, -190, 40, 760]} />
       </directionalLight>
     </>
   );
@@ -271,23 +356,10 @@ function Sun({ quality, night }) {
 
 // Ciel, brume, lumière, sol et quartier environnant.
 export default function Environment({ quality, night }) {
-  const haze = night ? NIGHT_COLOR : FOG_COLOR;
   return (
     <>
-      <color attach="background" args={[haze]} />
-      <fog attach="fog" args={[haze, night ? 220 : 320, night ? 1100 : 1500]} />
-      {night ? (
-        <Stars radius={900} depth={200} count={quality.shadows ? 2600 : 1200} factor={22} saturation={0} fade speed={0.4} />
-      ) : (
-        <Sky
-          distance={450000}
-          sunPosition={SUN_DIRECTION.toArray()}
-          turbidity={5.5}
-          rayleigh={1.1}
-          mieCoefficient={0.006}
-          mieDirectionalG={0.82}
-        />
-      )}
+      <color attach="background" args={[FOG_COLOR]} />
+      <fog attach="fog" args={[FOG_COLOR, 320, 1500]} />
       <Sun quality={quality} night={night} />
       <Ground />
       <Surroundings quality={quality} />

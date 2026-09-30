@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import {
   BoxGeometry,
   Color,
@@ -12,7 +12,7 @@ import {
   Vector3,
 } from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-import { NightContext } from './nightContext';
+import { registerGlow } from './dayNight';
 
 // Formes unitaires partagées par toute la scène (1 × 1 × 1 avant mise à l'échelle).
 const pyramid = new ConeGeometry(Math.SQRT1_2, 1, 4, 1);
@@ -37,8 +37,9 @@ const _c = new Color();
 // Brique de base de la scène : un lot d'objets identiques dessinés en UN seul
 // appel GPU (instancing). `items` = [{ p: [x,y,z], s: [sx,sy,sz], ry?, rx?, rz?, c? }]
 // où `c` est une couleur propre à l'élément.
-// De nuit : les lots `litAtNight` (vitrages) s'éclairent de l'intérieur et les
-// lots déjà lumineux (projecteurs, lampadaires) brillent davantage.
+// Le soir : les lots `litAtNight` (vitrages) s'éclairent de l'intérieur et les
+// lots déjà lumineux (projecteurs, lampadaires) brillent davantage — de façon
+// progressive, pilotée par dayNight.js.
 export default function Boxes({
   items,
   shape = 'box',
@@ -54,15 +55,12 @@ export default function Boxes({
   onBeforeCompile,
 }) {
   const ref = useRef();
-  const night = useContext(NightContext);
-  let glow = emissive ?? '#000000';
-  let glowIntensity = emissiveIntensity;
-  if (night && litAtNight) {
-    glow = '#ffc877';
-    glowIntensity = 0.85;
-  } else if (night && emissive) {
-    glowIntensity = emissiveIntensity * 3.5;
-  }
+  const glows = litAtNight || Boolean(emissive);
+
+  useLayoutEffect(() => {
+    if (!glows || !ref.current) return undefined;
+    return registerGlow(ref.current.material, { lit: litAtNight, intensity: emissiveIntensity });
+  }, [glows, litAtNight, emissiveIntensity]);
   const tinted = items.some((it) => it.c);
 
   useLayoutEffect(() => {
@@ -95,8 +93,8 @@ export default function Boxes({
         color={tinted ? '#ffffff' : color}
         roughness={rough}
         metalness={metal}
-        emissive={glow}
-        emissiveIntensity={glowIntensity}
+        emissive={litAtNight ? '#ffc877' : (emissive ?? '#000000')}
+        emissiveIntensity={litAtNight ? 0 : emissiveIntensity}
         transparent={opacity < 1}
         opacity={opacity}
       />

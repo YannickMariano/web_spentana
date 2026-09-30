@@ -15,7 +15,6 @@ import {
 export const SUN_DIRECTION = new Vector3(0.52, 0.62, 0.56).normalize();
 
 export const FOG_COLOR = '#cfdceb';
-export const NIGHT_COLOR = '#0a1220';
 
 // Fabrique une carte d'environnement (ciel dégradé + soleil) sans aucun
 // fichier HDR à télécharger. Elle donne les reflets des vitres, de l'eau et
