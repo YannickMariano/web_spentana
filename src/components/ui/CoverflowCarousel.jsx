@@ -38,6 +38,10 @@ export default function CoverflowCarousel({
   falloff = 0.56,
   fade = 0.1,
   cardWidth = 'clamp(148px, 22vw, 260px)',
+  // Rapport largeur / hauteur des cartes (1 = carré).
+  aspect = 1,
+  // Rendu personnalisé d'une carte ; par défaut, l'image `slide.src`.
+  renderSlide,
   gap = 0.05,
   loop = true,
   showPagination = false,
@@ -229,7 +233,10 @@ export default function CoverflowCarousel({
           className={styles.frame}
           style={{ perspective: `calc(var(--cf-card) * ${perspective})` }}
         >
-          <div className={styles.stage} style={{ height: 'var(--cf-card)' }}>
+          <div
+            className={styles.stage}
+            style={{ height: `calc(var(--cf-card) / ${aspect})` }}
+          >
             {slides.map((slide, index) => (
               <div
                 key={index}
@@ -240,16 +247,20 @@ export default function CoverflowCarousel({
                 aria-roledescription="slide"
                 aria-label={`${index + 1} sur ${count}`}
                 className={cx(styles.card, cardClassName)}
-                style={{ width: 'var(--cf-card)' }}
+                style={{ width: 'var(--cf-card)', aspectRatio: aspect }}
               >
-                <img
-                  src={slide.src}
-                  alt={slide.alt}
-                  draggable={false}
-                  loading="lazy"
-                  decoding="async"
-                  className={styles.img}
-                />
+                {renderSlide ? (
+                  renderSlide(slide, index)
+                ) : (
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    draggable={false}
+                    loading="lazy"
+                    decoding="async"
+                    className={styles.img}
+                  />
+                )}
               </div>
             ))}
           </div>

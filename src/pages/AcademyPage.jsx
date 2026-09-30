@@ -5,6 +5,7 @@ import Button from '../components/ui/Button';
 import Accordion from '../components/ui/Accordion';
 import DisciplineCard from '../components/cards/DisciplineCard';
 import CoachCard from '../components/cards/CoachCard';
+import CoverflowCarousel from '../components/ui/CoverflowCarousel';
 import { disciplines } from '../data/disciplines';
 import { coaches } from '../data/coaches';
 import { academyFacts, academyIntroPhoto, registrationSteps, faqAcademy } from '../data/academy';
@@ -83,11 +84,17 @@ export default function AcademyPage() {
             accent="var(--color-marine)"
             title="Des encadrants diplômés et connus des familles."
           />
-          <div className={styles.coachGrid}>
-            {coaches.map((c) => (
-              <CoachCard key={c.id} coach={c} />
-            ))}
-          </div>
+          <Reveal>
+            <CoverflowCarousel
+              slides={coaches}
+              renderSlide={(c) => <CoachCard coach={c} />}
+              aspect={0.66}
+              cardWidth="clamp(200px, 24vw, 270px)"
+              label="Nos entraîneurs"
+              showNavigation
+              showPagination
+            />
+          </Reveal>
         </div>
       </section>
 

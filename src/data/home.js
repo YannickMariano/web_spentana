@@ -58,7 +58,7 @@ export const whyPoints = [
 export const stats = [
   { target: 8, suffix: '', label: 'Infrastructures', accent: '#2c85c8' },
   { target: 5, suffix: '', label: 'Disciplines enseignées', accent: '#14528c' },
-  { target: 1200, suffix: '+', label: 'Membres actifs', accent: '#2f9e44' },
-  { target: 40, suffix: '', label: 'Places à Taninketsa', accent: '#2c85c8' },
+  { target: 270, suffix: '+', label: 'Membres actifs', accent: '#2f9e44' },
+  { target: 30, suffix: '', label: 'Places à Taninketsa', accent: '#2c85c8' },
   { target: 12, suffix: '+', label: 'Événements par an', accent: '#14528c' },
 ];

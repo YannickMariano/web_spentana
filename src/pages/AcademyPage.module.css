@@ -75,12 +75,6 @@
   gap: 20px;
 }
 
-.coachGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 18px;
-}
-
 .registration {
   background: var(--color-night);
   color: #fff;
