@@ -30,7 +30,7 @@ export const infra = [
     alt: 'Terrain de football à 9 du complexe Spentana',
     rates: [
       { when: 'Lundi → Vendredi', sans: '80 000 Ar', avec: '100 000 Ar' },
-      { when: 'Samedi & Dimanche', sans: '100 000 Ar', avec: '120 000 Ar' },
+      { when: 'Samedi & Dimanche', sans: '100 000 Ar', avec: '100 000 Ar' },
     ],
   },
   {

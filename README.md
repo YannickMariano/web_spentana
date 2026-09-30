@@ -207,3 +207,33 @@ prêt pour basculer vers une vidéo sans réécrire la page :
   `src/data/`.
 - Le dossier `public/Event/` (affiches d'inscription) n'est pas encore utilisé et
   reste disponible pour un usage ultérieur.
+
+---
+
+## Visite 3D (`/visite`)
+
+Le bouton **« Faire une visite »** (accueil et page Le Complexe) ouvre une visite
+virtuelle 3D plein écran du complexe (Three.js + React Three Fiber), chargée à la
+demande : le reste du site ne télécharge rien de plus.
+
+Tout se règle dans **`src/data/visite.js`**, sans toucher aux composants 3D :
+
+- **Position / taille** : `place(x1, y1, x2, y2)` = rectangle relevé sur le plan
+  (en pixels du plan, 2000 px de large). 1 px = 0,15 m (`PLAN_SCALE`).
+- **Orientation d'un bâtiment** : `facing: 'north' | 'south' | 'east' | 'west'`
+  (côté vers lequel regarde la façade) ; `rotation` pour un réglage fin.
+- **Nom, description, icône** : `name`, `short`, `description`, `icon`
+  (nom d'une icône de `src/components/ui/Icon.jsx`).
+- **Tarif** : repris de `src/data/infra.js` via `infraId` ; `price: '…'` pour en
+  forcer un ; `price: null` pour ne pas afficher de tarif.
+- **Caméra** du bouton « Voir » : `cameraPosition` / `cameraTarget`.
+- Décor : `grandstands` (tribunes + vestiaires), `parkings`, `toilets`, `gardens`,
+  `BOUNDARY_PLAN` (mur d'enceinte), `GATE` (portail), `cameraPresets`.
+
+Liens directs : `/visite?lieu=piscine` (fiche d'une infrastructure),
+`/visite?vue=general` (point de vue), `/visite?mode=marche` (visite libre).
+
+Les composants sont dans `src/components/3d/` (un fichier par type d'élément :
+`FootballField`, `BasketballCourt`, `SwimmingPool`, `Building`, `Restaurant`,
+`BilliardRoom`, `PetanqueCourt`, `Grandstand`, `Environment`, `CameraController`,
+`PlayerController`, `Hotspot`, `FacilityInfo`, `MiniMap`…).

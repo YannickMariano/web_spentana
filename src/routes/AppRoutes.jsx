@@ -8,10 +8,13 @@ import EventsPage from '../pages/EventsPage';
 import GalleryPage from '../pages/GalleryPage';
 import ContactPage from '../pages/ContactPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import VisitePage from '../pages/VisitePage';
 
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Visite 3D : plein écran, hors de la mise en page (ni header ni footer). */}
+      <Route path="/visite" element={<VisitePage />} />
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/complexe" element={<ComplexePage />} />

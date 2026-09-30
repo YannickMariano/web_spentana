@@ -1,4 +1,5 @@
 import PageHero from '../components/sections/PageHero';
+import Button from '../components/ui/Button';
 import SectionHeader from '../components/ui/SectionHeader';
 import Reveal from '../components/ui/Reveal';
 import Accordion from '../components/ui/Accordion';
@@ -17,7 +18,11 @@ export default function ComplexePage() {
         washColor="rgba(44,133,200,.32)"
         image="/Spentana/spfoota9.jpg"
         imageAlt="Vue du grand terrain de football du complexe Spentana"
-      />
+      >
+        <Button to="/visite" variant="accent" style={{ marginTop: 4, alignSelf: 'flex-start' }}>
+          Faire une visite
+        </Button>
+      </PageHero>
 
       <section className="section">
         <div className={`container ${styles.history}`}>

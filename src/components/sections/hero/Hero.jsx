@@ -32,6 +32,9 @@ export default function Hero() {
           <Button href={SITE.phoneHref} variant="primary">
             Appeler {SITE.phone}
           </Button>
+          <Button to="/visite" variant="accent">
+            Faire une visite
+          </Button>
         </div>
         <div className={styles.facts}>
           {heroFacts.map((f) => (
