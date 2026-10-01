@@ -26,3 +26,4 @@ dist-ssr
 
 # Identifiants EmailJS
 .env
+.env.example
