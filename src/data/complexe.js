@@ -13,7 +13,7 @@ export const historyPhotos = {
 export const faqComplexe = [
   {
     q: 'Comment réserver une infrastructure ?',
-    a: "Par téléphone, au +261 38 06 003 53 ou sur place, tous les jours de 8h à 20h. Vous indiquez l'infrastructure, la date et le créneau : l'accueil vous confirme la disponibilité immédiatement. Un acompte de 30 % réglé sur place ou par mobile money confirme la réservation.",
+    a: "Par téléphone, au +261 38 06 003 53 ou sur place, tous les jours de 8h à 19h. Vous indiquez le terrain, la date et le créneau : le responsable vous confirme la disponibilité immédiatement. Un acompte de 30 % réglé sur place ou par mobile money confirme la réservation.",
   },
   {
     q: 'Pourquoi deux tarifs par créneau ?',
@@ -25,6 +25,6 @@ export const faqComplexe = [
   },
   {
     q: 'Les vestiaires et douches sont-ils inclus ?',
-    a: 'Oui pour tous les terrains et la piscine. Les serviettes ne sont pas fournies. Des casiers sécurisés sont disponibles à l’accueil.',
+    a: 'Oui pour tous les terrains et la piscine. Des vestiaires sont à disposition.',
   },
 ];

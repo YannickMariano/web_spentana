@@ -2,11 +2,19 @@ import PageHero from '../components/sections/PageHero';
 import SectionHeader from '../components/ui/SectionHeader';
 import Reveal from '../components/ui/Reveal';
 import Button from '../components/ui/Button';
-import PlayerCard from '../components/cards/PlayerCard';
+import CoachCard from '../components/cards/CoachCard';
+import CoverflowCarousel from '../components/ui/CoverflowCarousel';
 import { taninPillars, journee, taninBlocks, squadStatsExtra } from '../data/taninketsa';
 import { players } from '../data/players';
 import { SITE } from '../constants/site';
 import styles from './TaninketsaPage.module.css';
+
+// Fiche joueur au format des cartes entraîneurs : numéro et poste s'ils sont
+// renseignés dans src/data/players.js, sinon le nom du centre.
+function toCard(player) {
+  const role = [player.numero && `N° ${player.numero}`, player.poste].filter(Boolean).join(' · ');
+  return { name: player.name, role: role || 'Taninketsa Academy', image: player.image };
+}
 
 export default function TaninketsaPage() {
   const squadStats = [{ k: String(players.length), l: 'Joueurs au centre' }, ...squadStatsExtra];
@@ -105,11 +113,17 @@ export default function TaninketsaPage() {
             ))}
           </Reveal>
 
-          <div className={styles.playersGrid}>
-            {players.map((p) => (
-              <PlayerCard key={p.id} player={p} />
-            ))}
-          </div>
+          <Reveal>
+            <CoverflowCarousel
+              slides={players}
+              renderSlide={(p) => <CoachCard coach={toCard(p)} />}
+              aspect={0.66}
+              cardWidth="clamp(200px, 24vw, 270px)"
+              label="Joueurs de Taninketsa Academy"
+              showNavigation
+              showPagination
+            />
+          </Reveal>
         </div>
       </section>
 

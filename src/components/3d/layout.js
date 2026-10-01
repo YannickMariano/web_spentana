@@ -1,5 +1,13 @@
 // Dispositions partagées entre le rendu 3D, le sol et les collisions.
-import { BOUNDARY, facilities, gardens, grandstands, parkings, toilets } from '../../data/visite';
+import {
+  BOUNDARY,
+  facilities,
+  featuredVehicles,
+  gardens,
+  grandstands,
+  parkings,
+  toilets,
+} from '../../data/visite';
 import { FACING, localDims } from './builder';
 
 // Un terrain ou un bassin a son grand axe le long de X local ; s'il est plus
@@ -112,6 +120,11 @@ function buildColliders() {
   });
   grandstands.forEach((g) => list.push(fullBox(g)));
   toilets.forEach((t) => list.push(fullBox(t)));
+  // Véhicules du complexe (emprise tournée d'un quart de tour si besoin).
+  featuredVehicles.forEach(({ position, heading, size }) => {
+    const across = Math.abs(Math.sin(heading)) > 0.5;
+    list.push(fullBox({ position, size: across ? [size[1], size[0]] : size }));
+  });
   return list;
 }
 

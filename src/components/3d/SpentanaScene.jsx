@@ -5,6 +5,7 @@ import CameraController from './CameraController';
 import Enclosure from './Enclosure';
 import Environment from './Environment';
 import Facility from './Facility';
+import FeaturedVehicles from './FeaturedVehicles';
 import Grandstand from './Grandstand';
 import HotspotProjector from './HotspotProjector';
 import ParkingLots from './ParkingLots';
@@ -126,6 +127,7 @@ export default function SpentanaScene({ mobile, night, onSelect, onReady, apiRef
       <Environment quality={quality} night={night} />
       <Enclosure quality={quality} />
       <ParkingLots parkings={parkings} fill={quality.fill} />
+      <FeaturedVehicles />
 
       {facilities.map((f) => (
         <Facility key={f.id} facility={f} quality={quality} onSelect={onSelect} />

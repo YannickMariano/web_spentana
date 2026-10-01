@@ -97,8 +97,7 @@ export default function HomePage() {
             <span className={styles.eyebrow}>Pourquoi Spentana</span>
             <h2>L'exigence d'un grand club, l'accueil d'un lieu de famille.</h2>
             <p>
-              Des installations entretenues, des encadrants diplômés, une équipe présente sept
-              jours sur sept et un site sécurisé pour les enfants.
+              Des installations entretenues, des encadrants diplômés, espace large pour oraganiser différents evènements pour toute une équipe et pour la famille .
             </p>
           </Reveal>
           <Reveal className={styles.whyGrid}>
@@ -166,6 +165,11 @@ export default function HomePage() {
               <TestimonialCard key={t.id} testimonial={t} />
             ))}
           </div>
+          <Reveal className={styles.testimonialsCta}>
+            <Button to={`/contact?sujet=${encodeURIComponent('Témoignage')}`} variant="primary">
+              Faire un témoignage
+            </Button>
+          </Reveal>
         </div>
       </section>
 

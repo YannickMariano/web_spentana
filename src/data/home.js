@@ -49,9 +49,9 @@ export const whyPoints = [
   { n: '01', accent: '#2c85c8', t: 'Terrains entretenus', d: 'Gazon de qualité, lignes claires, éclairage vérifié avant chaque soirée.' },
   { n: '02', accent: '#14528c', t: 'Encadrants diplômés', d: 'Formateurs licenciés et maîtres-nageurs présents à chaque séance.' },
   { n: '03', accent: '#2f9e44', t: 'Réservation claire', d: "Tarifs affichés, acompte de 30 %, report gratuit jusqu'à 48h." },
-  { n: '04', accent: '#2c85c8', t: 'Site sécurisé', d: 'Entrée gardiennée.' },
+  { n: '04', accent: '#2c85c8', t: 'Parking', d: 'Espace de stationnement disponible sur place.' },
   { n: '05', accent: '#14528c', t: 'Un lieu pour toute la famille', d: "Billard, pétanque et restauration pendant que les enfants s'entraînent." },
-  { n: '06', accent: '#2f9e44', t: 'Un seul numéro', d: 'Réservations, inscriptions et devis se règlent en un appel, tous les jours de 8h à 20h.' },
+  { n: '06', accent: '#2f9e44', t: 'Un seul numéro', d: 'Réservations, inscriptions et devis se règlent en un appel, tous les jours de 8h à 19h.' },
 ];
 
 // Les compteurs (0 → valeur) sont animés par le hook useCountUp au scroll.

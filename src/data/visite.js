@@ -339,9 +339,35 @@ export const parkings = [
 ];
 
 // Zones laissées sans véhicule (accès dégagés), en mètres : { center: [x, z], radius }.
+// Véhicules du complexe, garés sur le parking ouest des bureaux (côté
+// Foot à 7 — Terrain 2), capot tourné vers le bâtiment.
+// `heading` : 0 = avant vers le bas du plan, Math.PI / 2 = vers la droite.
+export const featuredVehicles = [
+  {
+    id: 'land-rover',
+    model: 'defender110',
+    label: 'Land Rover Defender 110 (2012)',
+    color: '#f2f2ee',
+    position: [toWorld(797.5, 925)[0], 0, toWorld(797.5, 925)[1]],
+    heading: Math.PI / 2,
+    size: [1.9, 4.8],
+  },
+  {
+    id: 'coaster',
+    model: 'coaster',
+    label: 'Toyota Coaster Spentana',
+    color: '#f6f6f3',
+    position: [toWorld(797.5, 961)[0], 0, toWorld(797.5, 961)[1]],
+    heading: Math.PI / 2,
+    size: [2.1, 7.1],
+  },
+];
+
 export const noParkingZones = [
   // Devant la porte de la salle de billard.
   { center: toWorld(548, 1005), radius: 7 },
+  // Places réservées au Land Rover et au Coaster.
+  ...featuredVehicles.map((v) => ({ center: [v.position[0], v.position[2]], radius: 1.6 })),
 ];
 
 export const toilets = [

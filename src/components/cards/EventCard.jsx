@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../ui/Reveal';
+import AddToCalendar from '../ui/AddToCalendar';
 import { SITE } from '../../constants/site';
 import styles from './EventCard.module.css';
 
@@ -17,7 +18,9 @@ function ctaHref(btn) {
 export default function EventCard({ event }) {
   const badgeBg = GROUP_BADGE[event.group] || '#2f9e44';
   const isMuted = event.group === 'Passés' || event.group === 'Résultats';
-  const href = ctaHref(event.btn);
+  const canAddToCalendar = Boolean(event.start) && !isMuted;
+  // Bouton d'action facultatif : affiché seulement si `btn` est renseigné.
+  const href = ctaHref(event.btn ?? '');
   const isInternal = href.startsWith('/');
   const CtaTag = isInternal ? Link : 'a';
   const ctaProp = isInternal ? { to: href } : { href };
@@ -35,16 +38,21 @@ export default function EventCard({ event }) {
         <h3 className={styles.title}>{event.title}</h3>
         <p className={styles.desc}>{event.desc}</p>
         {event.result && <span className={styles.result}>{event.result}</span>}
-        <CtaTag
-          {...ctaProp}
-          className={styles.cta}
-          style={{
-            background: isMuted ? 'var(--color-surface-tint)' : '#2f9e44',
-            color: isMuted ? 'var(--color-ink)' : '#fff',
-          }}
-        >
-          {event.btn}
-        </CtaTag>
+        <div className={styles.actions}>
+          {event.btn && (
+            <CtaTag
+              {...ctaProp}
+              className={styles.cta}
+              style={{
+                background: isMuted ? 'var(--color-surface-tint)' : '#2f9e44',
+                color: isMuted ? 'var(--color-ink)' : '#fff',
+              }}
+            >
+              {event.btn}
+            </CtaTag>
+          )}
+          {canAddToCalendar && <AddToCalendar event={event} />}
+        </div>
       </div>
     </Reveal>
   );

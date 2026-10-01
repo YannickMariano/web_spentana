@@ -11,5 +11,5 @@ export const contactFields = [
   { name: 'name', label: 'Nom', ph: 'Votre nom', type: 'text' },
   { name: 'email', label: 'Email', ph: 'vous@email.mg', type: 'email' },
   { name: 'phone', label: 'Téléphone', ph: '+261 38 …', type: 'tel' },
-  { name: 'subject', label: 'Sujet', ph: 'Réservation, inscription, partenariat…', type: 'text' },
+  { name: 'subject', label: 'Sujet', ph: 'Information, inscription, partenariat…', type: 'text' },
 ];

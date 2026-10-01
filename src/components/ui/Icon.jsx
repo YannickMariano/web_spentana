@@ -77,6 +77,7 @@ const ICONS = {
   arrowLeft: ['M19 12H5', 'M11 6l-6 6 6 6'],
   arrowRight: ['M5 12h14', 'M13 6l6 6-6 6'],
   close: ['M6 6l12 12', 'M18 6L6 18'],
+  calendar: ['M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z', 'M4 10h16M8 3v4M16 3v4', 'M12 13v5M9.5 15.5h5'],
 };
 
 export default function Icon({ name, size = 18, strokeWidth = 1.8, className, ...rest }) {

@@ -117,6 +117,25 @@
 .submit:hover {
   background: var(--color-primary-dark);
 }
+.submit:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+.error {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #fdecec;
+  border: 1px solid #f3c2c2;
+  font: 600 14px/1.5 var(--font-body);
+  color: #b42318;
+}
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
 .success {
   padding: 14px 16px;
   border-radius: 10px;
