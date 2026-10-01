@@ -44,14 +44,19 @@
   transform: rotate(-45deg);
 }
 
+/* Plein écran sous l'en-tête (76px + bordure), qui reste visible au-dessus
+   avec le bouton de fermeture. */
 .panel {
   position: fixed;
-  inset: 0;
-  z-index: 70;
+  top: 77px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 59;
   background: #fff;
   display: flex;
   flex-direction: column;
-  padding: 96px 24px 24px;
+  padding: 12px 24px 24px;
   gap: 4px;
   animation: sp-fade 0.25s both;
   overflow-y: auto;

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { NavLink } from 'react-router-dom';
 import { NAV_LINKS, SITE } from '../../constants/site';
 import Button from '../ui/Button';
@@ -25,7 +26,9 @@ export default function MobileMenu({ open, onToggle, onClose }) {
         <span />
       </button>
 
-      {open && (
+      {/* Rendu dans <body> : le `backdrop-filter` de l'en-tête confinerait sinon
+          ce panneau `position: fixed` à la hauteur de l'en-tête. */}
+      {open && createPortal(
         <nav className={styles.panel} aria-label="Navigation mobile">
           {NAV_LINKS.map((link) => (
             <NavLink
@@ -43,7 +46,8 @@ export default function MobileMenu({ open, onToggle, onClose }) {
           <Button href={SITE.phoneHref} variant="primary" className={styles.cta}>
             Appeler pour réserver
           </Button>
-        </nav>
+        </nav>,
+        document.body
       )}
     </>
   );
