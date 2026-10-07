@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
 import EventReminder from '../ui/EventReminder';
+import ChatWidget from '../ui/ChatWidget';
 
 export default function Layout() {
   return (
@@ -14,6 +15,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <ChatWidget />
     </>
   );
 }

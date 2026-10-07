@@ -1,0 +1,295 @@
+/* Fenêtre de l'assistant, style « verre dépoli » inspiré d'iOS : surfaces
+   translucides floutées, bordures claires, coins très arrondis, bulles
+   façon iMessage. */
+.root {
+  --glass-bg: rgba(255, 255, 255, 0.58);
+  --glass-strong: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-line: rgba(60, 60, 67, 0.12);
+  --ios-blue: #0a84ff;
+  --ios-text: #1c1c1e;
+  --ios-soft: rgba(60, 60, 67, 0.6);
+
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-body);
+}
+
+/* Bouton = le robot seul, sans cercle ni fond. L'ombre portée suit la
+   silhouette du robot pour qu'il reste visible sur n'importe quel fond. */
+.launcher {
+  display: grid;
+  place-items: center;
+  /* L'animation a des marges transparentes : on rapproche le robot du coin. */
+  margin: -18px -14px -16px 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ios-blue);
+  cursor: pointer;
+  filter: drop-shadow(0 6px 10px rgba(15, 30, 60, 0.35))
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+  transition: transform 0.25s;
+}
+.launcher:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+.launcher:focus-visible {
+  outline: 2px solid var(--ios-blue);
+  outline-offset: -12px;
+  border-radius: 24px;
+}
+
+.panel {
+  width: min(370px, calc(100vw - 32px));
+  height: min(560px, calc(100dvh - 130px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+  box-shadow:
+    0 24px 60px rgba(15, 30, 60, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  animation: chat-pop 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  transform-origin: bottom right;
+}
+@keyframes chat-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px 12px 16px;
+  border-bottom: 1px solid var(--glass-line);
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--ios-text);
+}
+/* Robot de l'en-tête, sans cercle ; marges négatives pour compenser les bords
+   transparents de l'animation sans agrandir l'en-tête. */
+.avatar {
+  flex: none;
+  margin: -10px -6px -10px -8px;
+  color: var(--ios-blue);
+  filter: drop-shadow(0 3px 5px rgba(15, 30, 60, 0.2));
+}
+.headerText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.headerText strong {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.headerText span {
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--ios-soft);
+}
+.close {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(120, 120, 128, 0.16);
+  color: var(--ios-soft);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.close:hover {
+  background: rgba(120, 120, 128, 0.26);
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 14px;
+  scrollbar-width: thin;
+}
+
+.bubble {
+  margin: 0;
+  max-width: 82%;
+  padding: 9px 14px;
+  border-radius: 20px;
+  font-size: 14.5px;
+  line-height: 1.42;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bot {
+  align-self: flex-start;
+  background: var(--glass-strong);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom-left-radius: 6px;
+  color: var(--ios-text);
+  box-shadow: 0 1px 2px rgba(15, 30, 60, 0.06);
+}
+.user {
+  align-self: flex-end;
+  background: linear-gradient(180deg, #2b95ff, var(--ios-blue));
+  border-bottom-right-radius: 6px;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(10, 132, 255, 0.25);
+}
+.error {
+  background: rgba(255, 59, 48, 0.12);
+  border-color: rgba(255, 59, 48, 0.25);
+  color: #c4271d;
+}
+
+.typing {
+  display: flex;
+  gap: 4px;
+  padding: 13px 15px;
+}
+.typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--ios-soft);
+  animation: chat-dot 1s infinite ease-in-out;
+}
+.typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes chat-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 6px;
+}
+.suggestion {
+  border: 1px solid rgba(10, 132, 255, 0.28);
+  border-radius: var(--radius-pill);
+  padding: 7px 13px;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--ios-blue);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: background 0.2s;
+}
+.suggestion:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--glass-line);
+  background: rgba(255, 255, 255, 0.35);
+}
+.form input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgba(60, 60, 67, 0.16);
+  border-radius: var(--radius-pill);
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.75);
+  font: inherit;
+  font-size: 14.5px;
+  color: var(--ios-text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form input::placeholder {
+  color: rgba(60, 60, 67, 0.45);
+}
+.form input:focus {
+  border-color: rgba(10, 132, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.15);
+}
+.send {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--ios-blue);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.send:not(:disabled):hover {
+  transform: scale(1.06);
+}
+.send:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Navigateurs sans flou d'arrière-plan : surface plus opaque pour rester lisible. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .root {
+    --glass-bg: rgba(248, 249, 252, 0.97);
+  }
+}
+
+@media (max-width: 480px) {
+  .root {
+    right: 14px;
+    bottom: 14px;
+  }
+  .launcher {
+    margin: -22px -18px -20px 0;
+    transform: scale(0.85);
+    transform-origin: bottom right;
+  }
+  .launcher:hover {
+    transform: scale(0.88);
+  }
+}
