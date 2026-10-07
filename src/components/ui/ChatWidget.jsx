@@ -22,17 +22,52 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState([WELCOME]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const rootRef = useRef(null);
   const listRef = useRef(null);
   const inputRef = useRef(null);
 
+  // Sur écran tactile, pas de focus automatique : le clavier s'ouvrirait
+  // aussitôt et masquerait la moitié de la fenêtre.
   useEffect(() => {
-    if (open) inputRef.current?.focus();
+    if (open && !window.matchMedia('(pointer: coarse)').matches) inputRef.current?.focus();
   }, [open]);
 
-  useEffect(() => {
+  const scrollToBottom = () => {
     const list = listRef.current;
     if (list) list.scrollTop = list.scrollHeight;
-  }, [messages, loading, open]);
+  };
+
+  useEffect(scrollToBottom, [messages, loading, open]);
+
+  // Zone réellement visible (hors clavier virtuel) exposée en variables CSS :
+  // la fenêtre se redimensionne quand le clavier s'ouvre au lieu d'être coupée.
+  useEffect(() => {
+    const root = rootRef.current;
+    const vv = window.visualViewport;
+    if (!open || !root || !vv) return undefined;
+    const update = () => {
+      root.style.setProperty('--chat-vh', `${vv.height}px`);
+      root.style.setProperty('--chat-top', `${vv.offsetTop}px`);
+      scrollToBottom();
+    };
+    update();
+    vv.addEventListener('resize', update);
+    vv.addEventListener('scroll', update);
+    return () => {
+      vv.removeEventListener('resize', update);
+      vv.removeEventListener('scroll', update);
+    };
+  }, [open]);
+
+  // Sur mobile la fenêtre occupe tout l'écran : on bloque le défilement de la page.
+  useEffect(() => {
+    if (!open || !window.matchMedia('(max-width: 600px)').matches) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -78,7 +113,7 @@ export default function ChatWidget() {
   const showSuggestions = messages.length === 1 && !loading;
 
   return (
-    <div className={styles.root}>
+    <div ref={rootRef} className={`${styles.root} ${open ? styles.rootOpen : ''}`}>
       {open && (
         <section className={styles.panel} aria-label="Assistant Spentana">
           <header className={styles.header}>

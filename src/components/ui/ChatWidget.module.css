@@ -48,7 +48,9 @@
 
 .panel {
   width: min(370px, calc(100vw - 32px));
-  height: min(560px, calc(100dvh - 130px));
+  /* Hauteur visible (clavier déduit) moins la place du robot et une marge. */
+  height: min(560px, calc(var(--chat-vh, 100dvh) - 150px));
+  min-height: 260px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -276,6 +278,49 @@
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .root {
     --glass-bg: rgba(248, 249, 252, 0.97);
+  }
+}
+
+/* Mobile : la fenêtre ouverte occupe toute la zone visible (au-dessus du
+   clavier) et le robot se masque ; on ferme avec le « × » de l'en-tête. */
+@media (max-width: 600px) {
+  .rootOpen .launcher {
+    display: none;
+  }
+  .rootOpen .panel {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--chat-top, 0px);
+    width: 100%;
+    height: var(--chat-vh, 100dvh);
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+    animation-name: chat-sheet;
+  }
+  .header {
+    padding-top: max(14px, env(safe-area-inset-top));
+  }
+  .form {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  /* 16px minimum : en dessous, iOS zoome la page à la saisie. */
+  .form input {
+    font-size: 16px;
+  }
+  .bubble {
+    max-width: 88%;
+  }
+}
+@keyframes chat-sheet {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
