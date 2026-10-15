@@ -7,7 +7,7 @@ import {
   sanitizeHistory,
 } from './_guard.js';
 
-const MODEL = 'gemini-3.6-flash';
+const MODEL = 'gemini-2-flash';
 
 // Fonction serveur Vercel : la clé GEMINI_API_KEY reste côté serveur et n'est
 // jamais envoyée au navigateur. En local, `npm run dev` sert aussi cette route
